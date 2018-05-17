@@ -9,6 +9,8 @@ public class Factory : MonoBehaviour {
     public GameObject spawnZone;
     Vector3 spawnPos,spawnOffset;
 
+    public int team;
+
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +18,7 @@ public class Factory : MonoBehaviour {
         Blueprint tempPrint = new Blueprint();
         tempPrint.cost = 100;
         tempPrint.spawnTime = 5;
+        tempPrint.team = team;
         tempPrint.prefab = (GameObject)Resources.Load("R_Unit_Prefab");
 
         Blueprint[] tempBlueprints = new Blueprint[3];
@@ -40,7 +43,7 @@ public class Factory : MonoBehaviour {
                 {//is spawnzone empty, really should check the size of the unit
                     Spawn();
                     progress = 0;
-                    Debug.Log("Phew... just spawned");
+                    //Debug.Log("Phew... just spawned");
                 }
                 else
                 {
@@ -58,8 +61,10 @@ public class Factory : MonoBehaviour {
 
         void Spawn()
         {
-            Instantiate(blueprints[unit.Dequeue()].prefab, spawnPos, Quaternion.LookRotation(Vector3.forward));
-            Debug.Log("spawnPos = " + spawnPos + " spawnOffset = " + spawnOffset);
+            Debug.Log("Factory " + team + " Spawned Unit of Team" + blueprints[0].team);
+            GameObject go = Instantiate(blueprints[unit.Dequeue()].prefab, spawnPos, Quaternion.LookRotation(Vector3.forward));
+            go.GetComponent<UnitController>().team = team;
+            //Debug.Log("spawnPos = " + spawnPos + " spawnOffset = " + spawnOffset);
         }
 
     public void SetBlueprints(Blueprint[] p_blueprints) {

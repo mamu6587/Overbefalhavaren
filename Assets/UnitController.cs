@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class UnitController : MonoBehaviour {
 
     public GameObject motherCube;
+
+    public int team; // 0 för blå, 1 för röd.
+
+    private NavMeshAgent agent;
 
     public List<GameObject> cubeArray = new List<GameObject>();
     public List<GameObject> weapons;
@@ -20,8 +24,27 @@ public class UnitController : MonoBehaviour {
     void Start () {
        
         direction = new Vector3(0, 0, 1);
+        agent = GetComponent<NavMeshAgent>();
+
         OrganizeChildren();
         GenerateUnitCollider();
+
+        //lite temporär testkod för att sätta en destination när vi spawnat klart. 
+
+        Debug.Log("Unit of Team " + team);
+
+        Vector3 targetPos = new Vector3(0,0,0);
+        if (team == 0)
+        {
+            targetPos = new Vector3(0,2,-91);
+        }
+        else if(team == 1)
+        {
+            targetPos = new Vector3(0, 2, 90);
+        }
+        
+        agent.SetDestination(targetPos);
+        
 	}
 	
     //Ska organisera alla bygg-block vi består utav (våra CompCubes/GameObjects) i vår lista.
@@ -36,10 +59,6 @@ public class UnitController : MonoBehaviour {
             //This should add the cube that the compcube script is attached to.
             cubeArray.Add(children[i].gameObject);
         }
-
-        
-       
-        
     }
     private void OnDrawGizmosSelected()
     {
@@ -129,8 +148,8 @@ public class UnitController : MonoBehaviour {
 
         
 
-        Debug.Log("sizeOffset = " + sizeOffset);
-        Debug.Log("minVec = " + minVec + " maxVec = " + maxVec);
+        //Debug.Log("sizeOffset = " + sizeOffset);
+        //Debug.Log("minVec = " + minVec + " maxVec = " + maxVec);
         Bounds newBounds = new Bounds();
         newBounds.SetMinMax(minVec, maxVec);
         newCollider.center = newBounds.center;
