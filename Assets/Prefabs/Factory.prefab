@@ -166,7 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26da92d71e7695f4a8ed72d6b6693df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit: []
   spawnTime: 3
   progress: 0
   efficiency: 1
