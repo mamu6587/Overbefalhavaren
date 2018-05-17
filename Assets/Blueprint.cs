@@ -6,4 +6,5 @@ public class Blueprint {
     public float spawnTime;
     public GameObject prefab;
     public int cost;
+    public int team;
 }

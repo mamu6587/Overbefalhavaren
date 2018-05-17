@@ -66,8 +66,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1836962729960276}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 2, z: 90}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: -91}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4638122302019240}
@@ -170,3 +170,4 @@ MonoBehaviour:
   progress: 0
   efficiency: 1
   spawnZone: {fileID: 1594288383153544}
+  team: 1
