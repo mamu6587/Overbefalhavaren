@@ -58,6 +58,8 @@ MonoBehaviour:
   - {fileID: 1833868582218164, guid: 109d5df86abe9f74a8582196d61b4d87, type: 2}
   - {fileID: 1898780198117316, guid: 268da4e063f6912478ff9d3ee3ac584a, type: 2}
   selection: 0
+  blocksPlaced: 1
+  blocks: []
   componentLayer:
     serializedVersion: 2
     m_Bits: 4294967240

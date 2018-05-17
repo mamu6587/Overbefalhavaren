@@ -9,6 +9,7 @@ public class Factory : MonoBehaviour {
     public GameObject spawnZone;
     Vector3 spawnPos,spawnOffset;
 
+
 	// Use this for initialization
 	void Start () {
 
@@ -21,6 +22,9 @@ public class Factory : MonoBehaviour {
         tempBlueprints[0] = tempPrint;
 
         SetBlueprints(tempBlueprints);
+
+        unit = new Queue<int>();
+        unit.Enqueue(0);
 
         spawnPos = spawnZone.transform.position;
         spawnOffset = spawnZone.transform.localScale;
