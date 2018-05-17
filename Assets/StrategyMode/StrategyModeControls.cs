@@ -8,6 +8,7 @@ public class StrategyModeControls : MonoBehaviour
     Transform c_transform;
     LayerMask componentLayer;
     public StrategyModeController SMC;
+    public bool multiplayer;
 
 
     public float sensX = 100.0f;
@@ -19,6 +20,8 @@ public class StrategyModeControls : MonoBehaviour
 
     void Start()
     {
+        multiplayer = false; ///////////////////////////////////////////////////
+
         c_transform = Camera.main.transform;
         componentLayer = SMC.TerrainUnitGui;
 
@@ -68,13 +71,19 @@ public class StrategyModeControls : MonoBehaviour
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, componentLayer))
             {
-                //SMC.PlaceBlock(hitInfo);
+                Debug.Log("Select HIT!" + hitInfo);
+                SMC.Select(hitInfo);
             }
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            //SMC.CycleSelection();
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, componentLayer))
+            {
+                SMC.Order(hitInfo);
+            }
         }
 
         if (Input.GetKey(KeyCode.Alpha3))
@@ -90,25 +99,20 @@ public class StrategyModeControls : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Delete))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); ;
-            RaycastHit hitInfo;
-            //if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, SMC.componentLayer))
-            //{
-            //    Debug.Log("name: " + hitInfo.transform.name);
-
-            //    //SMC.DeleteBlock(hitInfo);
-            //}
+            SMC.Delete();
         }
 
         //Save/Load
         if (Input.GetKey(KeyCode.F5))
         {
-            //SMC.Save();
+            if (!multiplayer)
+                SMC.Save();
         }
 
         if (Input.GetKey(KeyCode.F9))
         {
-            //SMC.Load();
+            if (!multiplayer)
+                SMC.Load();
         }
     }
 }
